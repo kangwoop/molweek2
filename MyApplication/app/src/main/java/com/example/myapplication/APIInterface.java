@@ -1,9 +1,12 @@
 package com.example.myapplication;
 
+import java.util.HashMap;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -16,8 +19,8 @@ public interface APIInterface {
     Call<ResponseBody> getFunc(@Query("data") String data);
 
     @FormUrlEncoded
-    @POST("retrofit/post")
-    Call<ResponseBody> postFunc(@Field("data") String data);
+    @POST("{path}")
+    Call<postResponse> postFunc(@Path("path") String path ,@FieldMap HashMap<String, Object> param);
 
     @FormUrlEncoded
     @PUT("/retrofit/put/{id}")

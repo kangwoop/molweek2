@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Intent intent;
     private final String Tag = "MainActivityLog";
-    private final String URL = "http://192.249.18.198:80";
+    private final String URL = "http://192.249.18.171:80";
 
     private Retrofit retrofit;
     private APIInterface service;
@@ -83,18 +84,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 });
                 break;
             case R.id.POST:
-                Call<ResponseBody> call_post = service.postFunc("post data");
-                call_post.enqueue(new Callback<ResponseBody>() {
+                HashMap<String, Object> param = new HashMap<>();
+                param.put("var1", 1);
+                param.put("var2", 2);
+                Call<postResponse> call_post = service.postFunc("login" ,param);
+                call_post.enqueue(new Callback<postResponse>() {
                     @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    public void onResponse(Call<postResponse> call, Response<postResponse> response) {
                         if(response.isSuccessful()){
-                            try{
-                                String result  = response.body().string();
-                                Log.v(Tag,"result = " + result);
-                                Toast.makeText(getApplicationContext(),result,Toast.LENGTH_SHORT).show();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
+                            //String result  = response.body().string();
+                            String result  = response.body().toString();
+                            Log.v(Tag,"result = " + result);
+                            Toast.makeText(getApplicationContext(),result,Toast.LENGTH_SHORT).show();
                         }
                         else{
                             Log.v(Tag,"error = " + String.valueOf(response.code()));
@@ -103,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
 
                     @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    public void onFailure(Call<postResponse> call, Throwable t) {
                         Log.v(Tag,"Fail");
                         Toast.makeText(getApplicationContext(),"Fail",Toast.LENGTH_SHORT).show();
                     }
