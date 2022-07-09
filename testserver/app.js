@@ -6,11 +6,8 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var db = require('./db');
 
-var country = require('./routes/country');
-var place = require('./routes/place');
-var login = require('./routes/login');
-var posting = require('./routes/posting');
-
+var retrofitRouter = require('./src/routes/retrofit');
+var Crouters = require('./src/routes/router')
 var app = express();
 
 // view engine setup
@@ -24,12 +21,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // app.use('/', indexRouter);
-// app.use('/retrofit',retrofitRouter);
+app.use('/retrofit',retrofitRouter);
 
-app.use('/country',country);
-app.use('/place',place);
-app.use('/login', login);
-app.use('/posting',posting);
+app.use('',Crouters);
 
 db.connect(function(err){
   if(err){

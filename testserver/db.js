@@ -6,8 +6,8 @@ exports.connect = function(done) {
     pool = mysql.createPool({
         connectionLimit: 100,
         host     : 'localhost',
-        user     : 'user',
-        password : 'Rkddn!23',
+        user     : 'user1',
+        password : '',
         database : 'Trip'
     });
 }
@@ -16,21 +16,3 @@ exports.connect = function(done) {
 exports.get = function() {
   return pool;
 }
-
-// const connection = mysql.createConnection({
-//     host:'localhost',
-//     user:'user',
-//     password:'Rkddn!23',
-//     database:'Trip'
-// });
-
-// function getAllPLACENAME(callback){
-//     connection.query('SELECT NAME FROM PLACE ORDER BY ID DESC',(err,rows,fields)=>{
-//         if(err)throw err;
-//         callback(rows);
-//     });
-// }
-
-// module.exports = {
-//     getAllPLACENAME
-// }
