@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="delete">DELETE</string>
+    <string name="update">UPDATE</string>
+    <string name="post">POST</string>
+    <string name="get">GET</string>
+</resources>
