@@ -1,5 +1,6 @@
 package com.example.test1;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import okhttp3.ResponseBody;
@@ -23,6 +24,8 @@ public interface RetrofitAPIInterface {
     @POST("{path}")
     Call<LoginRes> JoinReqFunc(@Path("path") String path ,@FieldMap HashMap<String, Object> param);
 
-
+    @FormUrlEncoded
+    @POST("{path}")
+    Call<ArrayList<SearchRes>> CountryReqFunc(@Path("path") String path , @FieldMap HashMap<String, Object> param);
 
 }

@@ -25,6 +25,9 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    buildFeatures{
+        viewBinding = true
+    }
 
 }
 
@@ -45,4 +48,5 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:4.9.0"
     implementation 'com.android.volley:volley:1.1.1'//서버통신 관련 라이브러리
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
-    implementation 'me.relex:circleindicator:2.1.6'}
+    implementation 'me.relex:circleindicator:2.1.6'
+}
