@@ -1,18 +1,15 @@
-package com.example.test1;
+package com.example.searchcountry;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.test1.MainActivity;
+import com.example.test1.RetrofitAPIInterface;
 import com.example.test1.databinding.CountrysBinding;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,7 +22,7 @@ import retrofit2.Retrofit;
 public class SearchActivity extends Activity {
     private CountrysBinding binding;
     private ArrayList<SearchCountryData> dataList;
-    private  SearchAdapter adapter;
+    private SearchAdapter adapter;
     private LinearLayoutManager linearLayoutManager;
 
     private Retrofit retrofit;

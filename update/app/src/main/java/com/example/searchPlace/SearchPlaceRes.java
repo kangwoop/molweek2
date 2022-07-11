@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize;
 @Parcelize
 public class SearchPlaceRes {
     @SerializedName("avgstar")
-    public int AvgStar;
+    public String AvgStar;
     @SerializedName("PicturePath")
     public String PicturePath;
     @SerializedName("PlaceName")

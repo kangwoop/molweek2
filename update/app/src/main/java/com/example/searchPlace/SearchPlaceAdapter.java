@@ -1,13 +1,18 @@
 package com.example.searchPlace;
 
+import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.searchcountry.SearchActivity;
 import com.example.test1.R;
 import com.example.test1.databinding.PlaceItemBinding;
 
@@ -19,6 +24,7 @@ public class SearchPlaceAdapter extends RecyclerView.Adapter<SearchPlaceAdapter.
     public SearchPlaceAdapter(ArrayList<SearchPlaceData>arrayList){
         this.dataArrayList = arrayList;
     }
+
     @NonNull
     @Override
     public AdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -55,12 +61,6 @@ public class SearchPlaceAdapter extends RecyclerView.Adapter<SearchPlaceAdapter.
             binding.star4.setImageResource(R.drawable.star);
             binding.star5.setImageResource(R.drawable.star);
         }
-        binding.like.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                binding.like.setImageResource(R.drawable.heart);
-            }
-        });
     }
     @Override
     public int getItemCount() {
@@ -72,12 +72,16 @@ public class SearchPlaceAdapter extends RecyclerView.Adapter<SearchPlaceAdapter.
         public AdapterViewHolder(@NonNull PlaceItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+            binding.like.setImageResource(R.drawable.emptyheart);
             binding.getRoot().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
                     if(pos != RecyclerView.NO_POSITION){
                         Toast.makeText(binding.placename.getContext(),pos + "아이템",Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(binding.placename.getContext().getApplicationContext(), SearchActivity.class);
+                        i.putExtra("placename", dataArrayList.get(pos).PlaceName);
+                        binding.placepicture.getContext().startActivity(i);
                     }
                 }
             });

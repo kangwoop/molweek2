@@ -1,4 +1,4 @@
-package com.example.test1;
+package com.example.searchcountry;
 
 import com.google.gson.annotations.SerializedName;
 

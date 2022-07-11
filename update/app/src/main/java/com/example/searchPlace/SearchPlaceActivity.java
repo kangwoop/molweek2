@@ -7,7 +7,6 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.test1.SearchAdapter;
 import com.example.test1.MainActivity;
 import com.example.test1.RetrofitAPIInterface;
 import com.example.test1.databinding.ActivityPlaceBinding;
@@ -39,6 +38,11 @@ public class SearchPlaceActivity extends Activity {
         service = ((MainActivity)MainActivity.context_main).service;
         HashMap<String, Object> param = new HashMap<>();
         param.put("country", country);
+        linearLayoutManager = new LinearLayoutManager(this);
+        binding.places.setLayoutManager(linearLayoutManager);
+        dataList = new ArrayList<>();
+        adapter = new SearchPlaceAdapter(dataList);
+        binding.places.setAdapter(adapter);
 
         Call<ArrayList<SearchPlaceRes>> call_post = service.SearchPlaceReqFunc("mysite",param);
         call_post.enqueue(new Callback<ArrayList<SearchPlaceRes>>() {
@@ -48,7 +52,7 @@ public class SearchPlaceActivity extends Activity {
                     ArrayList<SearchPlaceRes> result = response.body();
                     Log.v(Tag, "search result : " + result.toString());
                     for(int i = 0; i < result.size(); i++){
-                        SearchPlaceData data = new SearchPlaceData(result.get(i).PicturePath,result.get(i).PlaceName,result.get(i).AvgStar);
+                        SearchPlaceData data = new SearchPlaceData(result.get(i).PicturePath,result.get(i).PlaceName,Double.parseDouble(result.get(i).AvgStar),true);
                         dataList.add(data);
                         adapter.notifyDataSetChanged();
                     }
@@ -65,11 +69,7 @@ public class SearchPlaceActivity extends Activity {
 
             }
         });
-        linearLayoutManager = new LinearLayoutManager(this);
-        binding.places.setLayoutManager(linearLayoutManager);
-        dataList = new ArrayList<>();
-        adapter = new SearchPlaceAdapter(dataList);
-        binding.places.setAdapter(adapter);
+
 
     }
 }
