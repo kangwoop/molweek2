@@ -129,7 +129,7 @@ public class LoginActivity extends AppCompatActivity {
                                 myApp.setName(response.body().Name);
                                 //Log.i("Originaltokenis", myApp.getToken());
                                 //Log.i("OriginalNameis", response.body().Name);
-                                Intent intent = new Intent(LoginActivity.this, WriteActivity.class);
+                                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                                 startActivity(intent);
                             }
                         }

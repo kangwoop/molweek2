@@ -55,34 +55,34 @@ public class SearchPlaceActivity extends Activity {
                     Log.v(Tag, "search result : " + result.toString());
                     for(int i = 0; i < result.size(); i++){
                         SearchPlaceData data = new SearchPlaceData(result.get(i).PicturePath,result.get(i).PlaceName,Double.parseDouble(result.get(i).AvgStar),true);
-                        HashMap<String, Object> param5 = new HashMap<>();
-                        param5.put("Place_name", dataList.get(i).PlaceName);
-                        param5.put("Htoken", "$2a$10$OorQ/m8VtpEX8Xzg/zXzI.zkPfNRxpvegGcN1CWncwljw6FM9aTau");
-                        Call<LoginRes> call_post5 = service.LoginReqFunc("isfavorite",param5);
-                        call_post5.enqueue(new Callback<LoginRes>() {
-                            @Override
-                            public void onResponse(Call<LoginRes> call, retrofit2.Response<LoginRes> response) {
-                                if(response.isSuccessful()){
-                                    String result  = response.body().result;
-                                    if(result.equals("true")) {
-                                        data.setIsEmpty(true);
-                                    }
-                                    else {
-                                        data.setIsEmpty(false);
-                                    }
-                                }
-                                else{
-                                    Log.v(Tag,"error = " + String.valueOf(response.code()));
-                                    Toast.makeText(getApplicationContext(),String.valueOf(response.code()),Toast.LENGTH_SHORT).show();
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<LoginRes> call, Throwable t) {
-                                Log.v(Tag,"Fail");
-                                Toast.makeText(getApplicationContext(),"Fail",Toast.LENGTH_SHORT).show();
-                            }
-                        });
+//                        HashMap<String, Object> param5 = new HashMap<>();
+//                        param5.put("Place_name", dataList.get(i).PlaceName);
+//                        param5.put("Htoken", "$2a$10$OorQ/m8VtpEX8Xzg/zXzI.zkPfNRxpvegGcN1CWncwljw6FM9aTau");
+//                        Call<LoginRes> call_post5 = service.LoginReqFunc("isfavorite",param5);
+//                        call_post5.enqueue(new Callback<LoginRes>() {
+//                            @Override
+//                            public void onResponse(Call<LoginRes> call, retrofit2.Response<LoginRes> response) {
+//                                if(response.isSuccessful()){
+//                                    String result  = response.body().result;
+//                                    if(result.equals("true")) {
+//                                        data.setIsEmpty(true);
+//                                    }
+//                                    else {
+//                                        data.setIsEmpty(false);
+//                                    }
+//                                }
+//                                else{
+//                                    Log.v(Tag,"error = " + String.valueOf(response.code()));
+//                                    Toast.makeText(getApplicationContext(),String.valueOf(response.code()),Toast.LENGTH_SHORT).show();
+//                                }
+//                            }
+//
+//                            @Override
+//                            public void onFailure(Call<LoginRes> call, Throwable t) {
+//                                Log.v(Tag,"Fail");
+//                                Toast.makeText(getApplicationContext(),"Fail",Toast.LENGTH_SHORT).show();
+//                            }
+//                        });
                         dataList.add(data);
                         adapter.notifyDataSetChanged();
                     }
