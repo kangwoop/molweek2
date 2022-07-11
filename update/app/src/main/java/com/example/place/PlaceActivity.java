@@ -1,6 +1,8 @@
 package com.example.place;
 
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,19 +26,26 @@ import com.example.test1.RetrofitAPIInterface;
 import com.example.test1.WriteActivity;
 import com.example.test1.databinding.ActivityPlaceBinding;
 import com.example.test1.databinding.ActivityPlaceinfoBinding;
-//import com.google.android.gms.maps.GoogleMap;
-//import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class PlaceActivity extends AppCompatActivity{
-    //MapView sView = null;
+public class PlaceActivity extends AppCompatActivity implements OnMapReadyCallback {
+    MapView mapView = null;
     private ActivityPlaceinfoBinding binding;
     private ArrayList<PostingData> dataList;
     private PostingAdapter adapter;
@@ -45,15 +54,23 @@ public class PlaceActivity extends AppCompatActivity{
     private Retrofit retrofit;
     private RetrofitAPIInterface service;
     private static final String Tag = "PlaceActivity";
+    private GoogleMap map;
+    double lat = 0;
+    double lon = 0;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityPlaceinfoBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        mapView = findViewById(R.id.mapView);
+        mapView.onCreate(savedInstanceState);
+
         String placename = getIntent().getStringExtra("placename");
         Log.i(Tag, "placename" + placename);
         retrofit = ((MainActivity) MainActivity.context_main).retrofit;
         service = ((MainActivity) MainActivity.context_main).service;
+        final Geocoder geocoder = new Geocoder(this);
         HashMap<String, Object> param2 = new HashMap<>();
         param2.put("Place_name", placename);
         param2.put("Htoken", "$2a$10$OorQ/m8VtpEX8Xzg/zXzI.zkPfNRxpvegGcN1CWncwljw6FM9aTau");
@@ -143,6 +160,18 @@ public class PlaceActivity extends AppCompatActivity{
                     binding.information.setText(result.Information);
                     //place사진들 넣기 // 생각해보니까 이거 뷰페이져?
                     binding.placespicture.setImageResource(R.drawable.heart);
+                    List<Address>list = null;
+                    String str = result.Address;
+                    try {
+                        list = geocoder.getFromLocationName(str,10);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    if(list != null){
+                        lat = list.get(0).getLatitude();
+                        lon = list.get(0).getLongitude();
+                    }
+                    onMapReady(map);
                     HashMap<String, Object> param1 = new HashMap<>();
                     param1.put("Place_name", placename);
                     Call<ArrayList<PostingInPlaceRes>> call_post2 = service.PostingInPlaceReqFunc("sitereviewlist", param1);
@@ -191,6 +220,58 @@ public class PlaceActivity extends AppCompatActivity{
                 startActivity(i);
             }
         });
+        mapView.getMapAsync(this::onMapReady);
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mapView.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mapView.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mapView.onPause();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mapView.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mapView.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mapView.onDestroy();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mapView.onLowMemory();
+    }
+    @Override
+    public void onMapReady(GoogleMap googleMap){
+        map = googleMap;
+        LatLng latLng = new LatLng(lat,lon);
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.title((String) binding.Placesname.getText());
+        markerOptions.position(latLng);
+        googleMap.addMarker(markerOptions);
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16));
 
         binding.gotomypage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -202,13 +283,6 @@ public class PlaceActivity extends AppCompatActivity{
         });
 
     }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.i(Tag, "DDDDDDD");
-    }
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
