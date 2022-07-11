@@ -9,6 +9,9 @@ public class LoginRes {
     @SerializedName("token")
     public String token;
 
+    @SerializedName("Name")
+    public String Name;
+
     @Override
     public String toString() {
         return "PostResult{" +

@@ -1,5 +1,6 @@
 package com.example.test1;
 
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -18,7 +19,8 @@ public class MainActivity extends AppCompatActivity {
     public Retrofit retrofit;
     public RetrofitAPIInterface service;
     public static Context context_main;
-    public String token;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +35,8 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         service = retrofit.create(RetrofitAPIInterface.class);
 
-        Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+        Intent i = new Intent(getApplicationContext(),LoginActivity.class);
         startActivity(i);
+
     }
 }

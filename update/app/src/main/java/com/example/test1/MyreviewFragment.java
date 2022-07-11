@@ -1,12 +1,26 @@
 package com.example.test1;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -46,6 +60,16 @@ public class MyreviewFragment extends Fragment {
         return fragment;
     }
 
+    AppCompatActivity mypageActivity;
+    private Retrofit retrofit;
+    private RetrofitAPIInterface service;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mypageActivity = (AppCompatActivity) getActivity();
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +82,56 @@ public class MyreviewFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_myreview, container, false);
+        super.onCreateView(inflater, container, savedInstanceState);
+        ViewGroup rootview = (ViewGroup)inflater.inflate(R.layout.fragment_myreview,container,false);
+
+        String token = getArguments().getString("token");
+        String Tag = "MyReviewFragment";
+        //Log.d("token~~:", token);
+
+        retrofit = ((MainActivity) MainActivity.context_main).retrofit;
+        service = ((MainActivity) MainActivity.context_main).service;
+
+        ArrayList<String> review_list = new ArrayList<>();
+
+        RecyclerView recyclerView = rootview.findViewById(R.id.myreviewrecyclerView);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mypageActivity);
+        recyclerView.setLayoutManager(linearLayoutManager);  // LayoutManager 설정
+
+        MyreviewAdapter customAdapter = new MyreviewAdapter(review_list);
+        recyclerView.setAdapter(customAdapter); // 어댑터 설정
+
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("token", token);
+        Call<ArrayList<RankRes>> call_post = service.RankReqFunc("myreview",param);
+        call_post.enqueue(new Callback<ArrayList<RankRes>>() {
+            @Override
+            public void onResponse(Call<ArrayList<RankRes>> call, Response<ArrayList<RankRes>> response) {
+                if(response.isSuccessful()){
+                    ArrayList<RankRes> result = response.body();
+                    Log.v(Tag, "search result : " + result.toString());
+                    for(int i = 0; i < result.size(); i++){
+                        review_list.add(result.get(i).PlaceName);
+                        customAdapter.notifyDataSetChanged();
+                    }
+
+                }
+                else{
+                    Log.v(Tag,"error = " + String.valueOf(response.code()));
+                    Toast.makeText(mypageActivity.getApplicationContext(),String.valueOf(response.code()),Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<ArrayList<RankRes>> call, Throwable t) {
+                Log.v(Tag,"Fail in search");
+                Toast.makeText(mypageActivity.getApplicationContext(),"Fail",Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
+
+        return rootview;
     }
 }

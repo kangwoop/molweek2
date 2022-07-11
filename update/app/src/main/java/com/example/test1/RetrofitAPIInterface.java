@@ -29,9 +29,11 @@ public interface RetrofitAPIInterface {
     @FormUrlEncoded
     @POST("{path}")
     Call<ArrayList<RankRes>> RankReqFunc(@Path("path") String path , @FieldMap HashMap<String, Object> param);
+
     @FormUrlEncoded
     @POST("{path}")
     Call<ArrayList<SearchRes>> CountryReqFunc(@Path("path") String path , @FieldMap HashMap<String, Object> param);
+
     @FormUrlEncoded
     @POST("{path}")
     Call<ArrayList<SearchPlaceRes>> SearchPlaceReqFunc(@Path("path") String path , @FieldMap HashMap<String, Object> param);

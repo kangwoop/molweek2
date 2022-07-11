@@ -35,7 +35,7 @@ public class HomeActivity extends AppCompatActivity {
     private static final String Tag = "HomeActivity";
     ViewpagerAdapter siteadapter;
     ViewPager2 viewpager;
-    ArrayList<String> site_list = new ArrayList<>();
+    ArrayList<RankData> site_list = new ArrayList<>();
     String token;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +54,7 @@ public class HomeActivity extends AppCompatActivity {
                     ArrayList<RankRes> result = response.body();
                     Log.v(Tag, "search result : " + result.toString());
                     for(int i = 0; i < result.size(); i++){
-                        site_list.add(result.get(i).PlaceName);
+                        site_list.add(new RankData(result.get(i).PicturePath, result.get(i).PlaceName));
                         siteadapter.notifyDataSetChanged();
                     }
 

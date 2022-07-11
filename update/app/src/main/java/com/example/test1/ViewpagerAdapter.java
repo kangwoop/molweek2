@@ -10,16 +10,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class ViewpagerAdapter extends RecyclerView.Adapter<ViewHolderPage>{
-    private ArrayList<String> sitelist;
+    private ArrayList<RankData> sitelist;
 
-    public ViewpagerAdapter(ArrayList<String> sitelist) {
+    public ViewpagerAdapter(ArrayList<RankData> sitelist) {
         this.sitelist = sitelist;
     }
 
+    Context context;
 
     @Override
     public ViewHolderPage onCreateViewHolder(ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
+        context = parent.getContext();
         View view = LayoutInflater.from(context).inflate(R.layout.viewpage, parent, false);
         return new ViewHolderPage(view);
     }
@@ -28,7 +29,7 @@ public class ViewpagerAdapter extends RecyclerView.Adapter<ViewHolderPage>{
     public void onBindViewHolder(ViewHolderPage holder, int position) {
         if(holder instanceof ViewHolderPage){
             ViewHolderPage viewHolder = (ViewHolderPage) holder;
-            viewHolder.onBind(sitelist.get(position));
+            viewHolder.onBind(sitelist.get(position), context);
             //Log.i("bind", Integer.toString(position));
         }
     }
