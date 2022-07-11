@@ -1,18 +1,14 @@
 package com.example.test1;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Html;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.login.KakaoApplication;
 import com.google.android.material.tabs.TabLayout;
 
 public class MypageActivity extends AppCompatActivity {
@@ -22,6 +18,7 @@ public class MypageActivity extends AppCompatActivity {
     MyreviewFragment myreviewFragment;
 
     int position;
+    String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +26,10 @@ public class MypageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mypage);
 
         Log.i("onCreateMain", "");
+
+        KakaoApplication myApp = (KakaoApplication)getApplicationContext();
+        token = myApp.getToken();
+        Log.i("Tokenisisisis", token);
 
         getSupportActionBar().setTitle("Favorites");
         tabs = findViewById(R.id.tabs);
@@ -38,6 +39,11 @@ public class MypageActivity extends AppCompatActivity {
 
         favoriteFragment = new FavoriteFragment();
         myreviewFragment = new MyreviewFragment();
+
+        Bundle bundle = new Bundle(1);
+        bundle.putString("token", token);
+        favoriteFragment.setArguments(bundle);
+        myreviewFragment.setArguments(bundle);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.containers, favoriteFragment).commit();
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -59,8 +65,9 @@ public class MypageActivity extends AppCompatActivity {
                 }else if(position==1) {
                     selected = myreviewFragment;
                     getSupportActionBar().setTitle("MyReview");
-                    getSupportFragmentManager().beginTransaction().replace(R.id.containers, selected).commit();
                 }
+                getSupportFragmentManager().beginTransaction().replace(R.id.containers, selected).commit();
+
             }
         });
         }

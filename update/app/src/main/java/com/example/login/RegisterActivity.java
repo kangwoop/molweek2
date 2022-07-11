@@ -18,7 +18,6 @@ import com.example.test1.LoginRes;
 import com.example.test1.MainActivity;
 import com.example.test1.R;
 import com.example.test1.RetrofitAPIInterface;
-import com.example.test1.ValidateRequest;
 import com.kakao.sdk.user.model.User;
 
 import org.json.JSONException;

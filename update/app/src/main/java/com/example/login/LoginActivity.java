@@ -7,31 +7,24 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.toolbox.Volley;
 import com.example.test1.HomeActivity;
 import com.example.test1.LoginRes;
 import com.example.test1.MainActivity;
+import com.example.test1.MypageActivity;
 import com.example.test1.R;
 import com.example.test1.RetrofitAPIInterface;
+import com.example.test1.WriteActivity;
 import com.kakao.sdk.auth.model.OAuthToken;
 import com.kakao.sdk.user.UserApiClient;
 import com.kakao.sdk.user.model.User;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.HashMap;
 
 import kotlin.Unit;
-import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -51,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
     private Retrofit retrofit;
     private RetrofitAPIInterface service;
     private String token;
-
+    private KakaoApplication myApp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,9 +55,7 @@ public class LoginActivity extends AppCompatActivity {
 
         Retrofit retrofit = ((MainActivity)MainActivity.context_main).retrofit;
         RetrofitAPIInterface service = ((MainActivity)MainActivity.context_main).service;
-//        String token = ((MainActivity)MainActivity.context_main).token;
-
-
+        myApp = (KakaoApplication)getApplicationContext();
 
         KakaologinButton = findViewById(R.id.login);
         //nickName = findViewById(R.id.nickname);
@@ -134,8 +125,11 @@ public class LoginActivity extends AppCompatActivity {
                                 return;
                             }
                             else{
-                                token = response.body().token;
-                                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                                myApp.setToken(response.body().token);
+                                myApp.setName(response.body().Name);
+                                //Log.i("Originaltokenis", myApp.getToken());
+                                //Log.i("OriginalNameis", response.body().Name);
+                                Intent intent = new Intent(LoginActivity.this, WriteActivity.class);
                                 startActivity(intent);
                             }
                         }
@@ -168,6 +162,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     HashMap<String, Object> param = new HashMap<>();
                     param.put("Id", user.getId());
+                    param.put("Name", user.getKakaoAccount().getProfile().getNickname());
                     param.put("Pwd", "");
                     param.put("type", "kakao");
 
@@ -189,6 +184,8 @@ public class LoginActivity extends AppCompatActivity {
                                     return;
                                 }
                                 else{
+                                    myApp.setToken(response.body().token);
+                                    Log.i("Originaltokenis", myApp.getToken());
                                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                                     startActivity(intent);
                                 }

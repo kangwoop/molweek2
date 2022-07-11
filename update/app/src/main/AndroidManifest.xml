@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.test1">
+    package="com.example.test1" >
     <!-- 인터넷 사용 권한 설정 -->
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -20,11 +20,14 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBxFxaYgtkHv67vXuvY9twQF_AkQFUy9bk" />
         <activity
+            android:name=".WriteActivity"
+            android:exported="false" />
+        <activity
             android:name=".MypageActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,7 +36,7 @@
         </activity>
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -52,6 +55,7 @@
         <activity android:name="com.example.searchcountry.SearchActivity" />
         <activity android:name="com.example.searchPlace.SearchPlaceActivity" />
         <activity android:name="com.example.place.PlaceActivity"></activity>
+
     </application>
 
 </manifest>
