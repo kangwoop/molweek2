@@ -11,6 +11,7 @@
         android:text="MyReviews"
         android:textSize="32dp"
         android:textColor="#FFFFFFFF"
+        android:fontFamily="@font/fontstyle"
         android:padding="8dp"
         android:background="#FF3F3F3F"
         android:gravity="center"/>

@@ -66,14 +66,12 @@ public class HomeActivity extends AppCompatActivity {
             public void onFailure(Call<ArrayList<RankRes>> call, Throwable t) {
                 Log.v(Tag,"Fail in search");
                 Toast.makeText(getApplicationContext(),"Fail",Toast.LENGTH_SHORT).show();
-
             }
         });
 
         viewpager = findViewById(R.id.viewPager2);
         siteadapter = new ViewpagerAdapter(site_list);
         viewpager.setAdapter(siteadapter);
-
 
 
         GridView gridView = (GridView) findViewById(R.id.grid_view);

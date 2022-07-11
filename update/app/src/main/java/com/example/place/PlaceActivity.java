@@ -20,6 +20,7 @@ import com.example.searchcountry.SearchActivity;
 import com.example.test1.HomeActivity;
 import com.example.test1.LoginRes;
 import com.example.test1.MainActivity;
+import com.example.test1.MypageActivity;
 import com.example.test1.R;
 import com.example.test1.RetrofitAPIInterface;
 import com.example.test1.WriteActivity;
@@ -31,6 +32,7 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -270,5 +272,20 @@ public class PlaceActivity extends AppCompatActivity implements OnMapReadyCallba
         markerOptions.position(latLng);
         googleMap.addMarker(markerOptions);
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16));
+
+        binding.gotomypage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), MypageActivity.class);
+                // passing array index
+                startActivity(i);
+            }
+        });
+
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();   //현재 액티비티 종료
     }
 }
