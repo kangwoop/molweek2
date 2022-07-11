@@ -4,7 +4,7 @@ public class PostingData {
     String Posting_date;
     int star;
     String Posting;
-
+    String name;
     public int getStar() {
         return star;
     }
@@ -17,6 +17,8 @@ public class PostingData {
         return Posting_date;
     }
 
+    public String getName(){ return name;}
+
     public void setPosting(String posting) {
         Posting = posting;
     }
@@ -28,9 +30,13 @@ public class PostingData {
     public void setStar(int star) {
         this.star = star;
     }
-    public PostingData(String posting,String posting_date,int star){
+
+    public void setName(String name){ this.name = name; }
+
+    public PostingData(String posting,String posting_date,int star,String name){
         this.Posting = posting;
         this.Posting_date = posting_date;
         this.star = star;
+        this.name = name;
     }
 }

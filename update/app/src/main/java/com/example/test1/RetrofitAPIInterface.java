@@ -42,4 +42,5 @@ public interface RetrofitAPIInterface {
     @FormUrlEncoded
     @POST("{path}")
     Call<PlaceRes> PlaceFunc(@Path("path") String path , @FieldMap HashMap<String, Object> param);
+
 }
