@@ -7,16 +7,18 @@ import kotlinx.parcelize.Parcelize;
 @Parcelize
 public class SearchPlaceRes {
     @SerializedName("avgstar")
-    public String AvgStar;
+    public String avgStar;
     @SerializedName("PicturePath")
     public String PicturePath;
     @SerializedName("PlaceName")
     public String PlaceName;
+    @SerializedName("favorite")
+    public String favorite;
 
     @Override
     public String toString() {
         return "{" +
-                "Name=" + AvgStar +
+                "Name=" + avgStar +
                 ", PicturePath ='" + PicturePath + '\'' +
                 ", PlaceName ='" + PlaceName + '\'' +
                 '}';

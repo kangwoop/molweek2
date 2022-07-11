@@ -23,6 +23,7 @@
         android:layout_height="34dp"
         android:layout_marginStart="36dp"
         android:text="여기에는 장소이름"
+        android:fontFamily="@font/fontstyle"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

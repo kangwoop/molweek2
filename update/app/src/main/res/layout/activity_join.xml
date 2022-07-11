@@ -13,6 +13,7 @@
         android:layout_marginTop="120dp"
         android:layout_marginBottom="65dp"
         android:text="회원가입"
+        android:fontFamily="@font/fontstyle"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/join_name"
@@ -29,6 +30,7 @@
         android:layout_marginBottom="24dp"
         android:ems="10"
         android:hint="이름"
+        android:fontFamily="@font/fontstyle"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/join_email"
         app:layout_constraintEnd_toEndOf="@+id/check_button" />
@@ -40,6 +42,7 @@
         android:layout_marginBottom="24dp"
         android:ems="10"
         android:hint="비밀번호"
+        android:fontFamily="@font/fontstyle"
         android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/join_pwck"
         app:layout_constraintStart_toStartOf="@+id/join_email" />
@@ -51,6 +54,7 @@
         android:layout_marginBottom="267dp"
         android:ems="10"
         android:hint="비밀번호 확인"
+        android:fontFamily="@font/fontstyle"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/join_password" />
@@ -64,6 +68,7 @@
         android:layout_marginBottom="24dp"
         android:ems="10"
         android:hint="이메일"
+        android:fontFamily="@font/fontstyle"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toTopOf="@+id/join_password"
         app:layout_constraintEnd_toStartOf="@+id/check_button"
@@ -72,10 +77,10 @@
     <Button
         android:id="@+id/check_button"
         style="@style/defaultButton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="59dp"
+        android:layout_height="52dp"
         android:layout_marginEnd="97dp"
-        android:layout_marginRight="97dp"
+        android:fontFamily="@font/fontstyle"
         android:text="확인"
         app:layout_constraintBaseline_toBaselineOf="@+id/join_email"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -89,6 +94,7 @@
         android:layout_marginLeft="36dp"
         android:layout_marginTop="71dp"
         android:text="취소"
+        android:fontFamily="@font/fontstyle"
         app:layout_constraintStart_toEndOf="@+id/join_button"
         app:layout_constraintTop_toBottomOf="@+id/join_pwck" />
 
@@ -100,6 +106,7 @@
         android:layout_marginStart="96dp"
         android:layout_marginLeft="96dp"
         android:text="가입"
+        android:fontFamily="@font/fontstyle"
         app:layout_constraintBaseline_toBaselineOf="@+id/delete"
         app:layout_constraintStart_toStartOf="parent" />
 

@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.login.KakaoApplication;
 import com.example.login.LoginActivity;
+import com.example.place.PlaceActivity;
 
 import java.util.HashMap;
 
@@ -80,7 +81,14 @@ public class WriteActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),"Fail",Toast.LENGTH_SHORT).show();
                     }
                 });
+                finish();   //현재 액티비티 종료
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();   //현재 액티비티 종료
     }
 }

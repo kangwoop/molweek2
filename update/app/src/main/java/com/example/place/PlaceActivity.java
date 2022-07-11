@@ -18,13 +18,14 @@ import com.example.searchcountry.SearchActivity;
 import com.example.test1.HomeActivity;
 import com.example.test1.LoginRes;
 import com.example.test1.MainActivity;
+import com.example.test1.MypageActivity;
 import com.example.test1.R;
 import com.example.test1.RetrofitAPIInterface;
 import com.example.test1.WriteActivity;
 import com.example.test1.databinding.ActivityPlaceBinding;
 import com.example.test1.databinding.ActivityPlaceinfoBinding;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
+//import com.google.android.gms.maps.GoogleMap;
+//import com.google.android.gms.maps.MapView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,7 +36,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class PlaceActivity extends AppCompatActivity{
-    MapView sView = null;
+    //MapView sView = null;
     private ActivityPlaceinfoBinding binding;
     private ArrayList<PostingData> dataList;
     private PostingAdapter adapter;
@@ -190,5 +191,27 @@ public class PlaceActivity extends AppCompatActivity{
                 startActivity(i);
             }
         });
+
+        binding.gotomypage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), MypageActivity.class);
+                // passing array index
+                startActivity(i);
+            }
+        });
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i(Tag, "DDDDDDD");
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();   //현재 액티비티 종료
     }
 }
