@@ -15,5 +15,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:textSize="24dp"
-        android:text="text"/>
+        android:text="text"
+        android:fontFamily="@font/fontstyle"/>
 </LinearLayout>

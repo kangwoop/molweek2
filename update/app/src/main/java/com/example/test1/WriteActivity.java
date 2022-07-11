@@ -53,11 +53,14 @@ public class WriteActivity extends AppCompatActivity {
                 String contents = contentsInput.getText().toString();
                 int ratingbarupdate = (int) ratingBar.getRating();
 
+                String place = "Hi";
+
                 HashMap<String, Object> param = new HashMap<>();
-                param.put("token",Token);
+                param.put("Htoken",Token);
                 param.put("star", ratingbarupdate);
-                param.put("Name", Name);
-                param.put("content", contents);
+                param.put("name", Name);
+                param.put("Posting", contents);
+                param.put("PlaceName", place);
 
                 Call<LoginRes> call_post = service.LoginReqFunc("write",param);
                 call_post.enqueue(new Callback<LoginRes>() {

@@ -8,8 +8,8 @@ public class RankRes {
     @SerializedName("PlaceName")
     public String PlaceName;
 
-    @SerializedName("PicturePath")
-    public String PicturePath;
+    @SerializedName("Picturepath")
+    public String Picturepath;
 
     @SerializedName("Information")
     public String Information;
@@ -27,7 +27,7 @@ public class RankRes {
                 "Information=" + Information +
                 "star=" + star +
                 "Posting_date=" + Posting_date +
-                ", PicturePath ='" + PicturePath + '\'' +
+                ", PicturePath ='" + Picturepath + '\'' +
                 '}';
     }
 }

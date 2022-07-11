@@ -17,6 +17,7 @@ import com.example.test1.MainActivity;
 import com.example.test1.MypageActivity;
 import com.example.test1.R;
 import com.example.test1.RetrofitAPIInterface;
+import com.example.test1.WriteActivity;
 import com.kakao.sdk.auth.model.OAuthToken;
 import com.kakao.sdk.user.UserApiClient;
 import com.kakao.sdk.user.model.User;
@@ -128,7 +129,7 @@ public class LoginActivity extends AppCompatActivity {
                                 myApp.setName(response.body().Name);
                                 //Log.i("Originaltokenis", myApp.getToken());
                                 //Log.i("OriginalNameis", response.body().Name);
-                                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                                Intent intent = new Intent(LoginActivity.this, WriteActivity.class);
                                 startActivity(intent);
                             }
                         }

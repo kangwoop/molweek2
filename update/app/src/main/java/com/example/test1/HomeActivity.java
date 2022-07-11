@@ -54,7 +54,7 @@ public class HomeActivity extends AppCompatActivity {
                     ArrayList<RankRes> result = response.body();
                     Log.v(Tag, "search result : " + result.toString());
                     for(int i = 0; i < result.size(); i++){
-                        site_list.add(new RankData(result.get(i).PicturePath, result.get(i).PlaceName));
+                        site_list.add(new RankData(result.get(i).Picturepath, result.get(i).PlaceName));
                         siteadapter.notifyDataSetChanged();
                     }
 

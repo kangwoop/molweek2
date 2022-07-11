@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.searchPlace.SearchPlaceActivity;
 import com.example.test1.databinding.CountrylistBinding;
 
 import java.util.ArrayList;
@@ -52,7 +53,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.AdapterVie
                     if(pos != RecyclerView.NO_POSITION){
                         Toast.makeText(binding.country.getContext(),pos + "아이템",Toast.LENGTH_SHORT).show();
                         // Sending image id to FullScreenActivity
-                        Intent i = new Intent(binding.country.getContext(), SearchActivity.class);
+                        Intent i = new Intent(binding.country.getContext(), SearchPlaceActivity.class);
                         // passing array index
                         i.putExtra("country", dataArrayList.get(pos).countryName);
                         binding.country.getContext().startActivity(i);

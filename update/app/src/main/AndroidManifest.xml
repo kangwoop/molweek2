@@ -51,6 +51,7 @@
         <activity android:name=".HomeActivity" />
         <activity android:name=".SearchActivity" />
         <activity android:name="com.example.searchPlace.SearchPlaceActivity" />
+        
     </application>
 
 </manifest>

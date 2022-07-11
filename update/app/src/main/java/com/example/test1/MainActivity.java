@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         service = retrofit.create(RetrofitAPIInterface.class);
 
-        Intent i = new Intent(getApplicationContext(),LoginActivity.class);
+        Intent i = new Intent(getApplicationContext(),WriteActivity.class);
         startActivity(i);
 
     }
