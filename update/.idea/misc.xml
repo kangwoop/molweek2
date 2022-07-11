@@ -9,11 +9,13 @@
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.158" />
         <entry key="app/src/main/res/font/fontstyle.xml" value="0.11851851851851852" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.3898707071940104" />
+        <entry key="app/src/main/res/font/fontstyle.xml" value="0.11851851851851852" />
         <entry key="app/src/main/res/layout/activity_join.xml" value="0.33795623779296874" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.28072916666666664" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.28072916666666664" />
         <entry key="app/src/main/res/layout/activity_mypage.xml" value="0.19927536231884058" />
         <entry key="app/src/main/res/layout/activity_place.xml" value="0.3885416666666667" />
+        <entry key="app/src/main/res/layout/activity_placeinfo.xml" value="0.8869954427083333" />
         <entry key="app/src/main/res/layout/activity_write.xml" value="0.3885416666666667" />
         <entry key="app/src/main/res/layout/countrylist.xml" value="0.3885416666666667" />
         <entry key="app/src/main/res/layout/countrys.xml" value="0.3875" />
@@ -24,6 +26,8 @@
         <entry key="app/src/main/res/layout/frame_2.xml" value="0.3885416666666667" />
         <entry key="app/src/main/res/layout/frame_3.xml" value="0.3885416666666667" />
         <entry key="app/src/main/res/layout/frame_4.xml" value="0.3885416666666667" />
+        <entry key="app/src/main/res/layout/place_item.xml" value="0.6958157083262568" />
+        <entry key="app/src/main/res/layout/posting_item_inplace.xml" value="0.432712215320911" />
         <entry key="app/src/main/res/layout/myreviewlist.xml" value="0.3885416666666667" />
         <entry key="app/src/main/res/layout/styles.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/viewpage.xml" value="0.3885416666666667" />

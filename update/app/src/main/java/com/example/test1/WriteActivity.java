@@ -53,7 +53,7 @@ public class WriteActivity extends AppCompatActivity {
                 String contents = contentsInput.getText().toString();
                 int ratingbarupdate = (int) ratingBar.getRating();
 
-                String place = "Hi";
+                String place = getIntent().getStringExtra("placename");
 
                 HashMap<String, Object> param = new HashMap<>();
                 param.put("Htoken",Token);

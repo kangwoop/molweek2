@@ -1,4 +1,4 @@
-package com.example.test1;
+package com.example.searchcountry;
 
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.searchPlace.SearchPlaceActivity;
+import com.example.test1.R;
 import com.example.test1.databinding.CountrylistBinding;
 
 import java.util.ArrayList;
