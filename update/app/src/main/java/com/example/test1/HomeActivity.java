@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,6 +36,7 @@ public class HomeActivity extends AppCompatActivity {
     ViewPager2 viewpager;
     ArrayList<RankData> site_list = new ArrayList<>();
     String token;
+    ImageView imageView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +44,16 @@ public class HomeActivity extends AppCompatActivity {
 
         retrofit = ((MainActivity) MainActivity.context_main).retrofit;
         service = ((MainActivity) MainActivity.context_main).service;
+
+        imageView = findViewById(R.id.imageView5);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), MypageActivity.class);
+                startActivity(i);
+            }
+        });
+
         HashMap<String, Object> param = new HashMap<>();
         //param.put("pos", position);
         Call<ArrayList<RankRes>> call_post = service.RankReqFunc("rankinfo",param);

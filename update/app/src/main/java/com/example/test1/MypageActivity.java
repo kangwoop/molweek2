@@ -31,7 +31,7 @@ public class MypageActivity extends AppCompatActivity {
         token = myApp.getToken();
         Log.i("Tokenisisisis", token);
 
-        getSupportActionBar().setTitle("Favorites");
+        //getSupportActionBar().setTitle("Favorites");
         tabs = findViewById(R.id.tabs);
         tabs.addTab(tabs.newTab().setText("Favorites"));
         tabs.addTab(tabs.newTab().setText("MyReview"));
@@ -61,10 +61,10 @@ public class MypageActivity extends AppCompatActivity {
 
                 if(position==0){
                     selected = favoriteFragment;
-                    getSupportActionBar().setTitle("Favorites");
+                    //getSupportActionBar().setTitle("Favorites");
                 }else if(position==1) {
                     selected = myreviewFragment;
-                    getSupportActionBar().setTitle("MyReview");
+                    //getSupportActionBar().setTitle("MyReview");
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.containers, selected).commit();
 

@@ -151,7 +151,7 @@ public class PlaceActivity extends AppCompatActivity implements OnMapReadyCallba
             public void onClick(View v) {
                 HashMap<String, Object> param3 = new HashMap<>();
                 param3.put("Place_name", placename);
-                param3.put("Htoken", "$2a$10$OorQ/m8VtpEX8Xzg/zXzI.zkPfNRxpvegGcN1CWncwljw6FM9aTau");
+                param3.put("Htoken", token);
 
                 Call<LoginRes> call_post3 = service.LoginReqFunc("checkfavorite", param3);
                 call_post3.enqueue(new Callback<LoginRes>() {
@@ -258,12 +258,10 @@ public class PlaceActivity extends AppCompatActivity implements OnMapReadyCallba
         });
         mapView.getMapAsync(this::onMapReady);
 
-
         binding.gotomypage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), MypageActivity.class);
-                // passing array index
                 startActivity(i);
             }
         });

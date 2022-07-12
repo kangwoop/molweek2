@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -36,11 +37,14 @@ public class RegisterActivity extends AppCompatActivity {
     private AlertDialog dialog;
     private boolean is_valid = false; ////////
     private final String Tag = "RegisterActivityLog";
+    private TextView signup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_join );
+        signup = findViewById(R.id.signup);
+        signup.setText("회원가입");
 
         Retrofit retrofit = ((MainActivity)MainActivity.context_main).retrofit;
         RetrofitAPIInterface service = ((MainActivity)MainActivity.context_main).service;

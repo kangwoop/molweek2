@@ -13,7 +13,8 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="0.0"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,10 +27,15 @@
                 android:layout_height="240dp"
                 app:srcCompat="@drawable/star" />
 
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="12dp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="8dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -67,7 +73,8 @@
                     android:layout_height="59dp"
                     android:fontFamily="@font/fontstyle"
                     android:text="장소 이름입니다"
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    />
             </LinearLayout>
             <TextView
                 android:id="@+id/address"
@@ -75,29 +82,47 @@
                 android:layout_height="41dp"
                 android:fontFamily="@font/fontstyle"
                 android:text="상세 주소입니다"
-                tools:layout_editor_absoluteY="690dp" />
+                tools:layout_editor_absoluteY="690dp"
+                android:layout_marginHorizontal="8dp"/>
 
             <com.google.android.gms.maps.MapView
                 android:id="@+id/mapView"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:layout_marginTop="2dp"
-                android:contentDescription="@string/app_name" />
+                android:contentDescription="@string/app_name"
+                android:layout_marginHorizontal="8dp"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="29dp" />
 
             <TextView
                 android:id="@+id/information"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="140dp"
                 android:fontFamily="@font/fontstyle"
+                android:lineSpacingExtra="10dp"
                 android:text="상세 정보 적어욤"
+                android:textSize="20sp"
+                android:layout_marginHorizontal="8dp"/>
 
-                />
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:layout_marginTop="8dp"
+                android:layout_marginHorizontal="8dp"
+                android:text="[Review]" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/placerecycler"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"/>
 
         </LinearLayout>
     </ScrollView>
@@ -118,6 +143,11 @@
     <!--    app:layout_constraintTop_toBottomOf="@+id/mapView"-->
 
 
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:orientation="horizontal"></LinearLayout>-->
+
     <ImageView
         android:id="@+id/gotomypage"
         android:layout_width="65dp"
@@ -129,7 +159,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@android:drawable/sym_def_app_icon" />
+        app:srcCompat="@drawable/home" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
