@@ -1,5 +1,6 @@
 package com.example.place;
 
+import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
@@ -12,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.example.login.KakaoApplication;
 import com.example.login.LoginActivity;
 import com.example.searchPlace.SearchPlaceAdapter;
 import com.example.searchPlace.SearchPlaceData;
@@ -26,6 +29,7 @@ import com.example.test1.RetrofitAPIInterface;
 import com.example.test1.WriteActivity;
 import com.example.test1.databinding.ActivityPlaceBinding;
 import com.example.test1.databinding.ActivityPlaceinfoBinding;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -44,7 +48,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class PlaceActivity extends AppCompatActivity implements OnMapReadyCallback {
+implements OnMapReadyCallback
+public class PlaceActivity extends AppCompatActivity  {
     MapView mapView = null;
     private ActivityPlaceinfoBinding binding;
     private ArrayList<PostingData> dataList;
@@ -57,14 +62,20 @@ public class PlaceActivity extends AppCompatActivity implements OnMapReadyCallba
     private GoogleMap map;
     double lat = 0;
     double lon = 0;
+    private Context context;
+    String token;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityPlaceinfoBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        context = getApplicationContext();
         mapView = findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
+
+        KakaoApplication myApp = (KakaoApplication)getApplicationContext();
+        token = myApp.getToken();
 
         String placename = getIntent().getStringExtra("placename");
         Log.i(Tag, "placename" + placename);
@@ -73,7 +84,7 @@ public class PlaceActivity extends AppCompatActivity implements OnMapReadyCallba
         final Geocoder geocoder = new Geocoder(this);
         HashMap<String, Object> param2 = new HashMap<>();
         param2.put("Place_name", placename);
-        param2.put("Htoken", "$2a$10$OorQ/m8VtpEX8Xzg/zXzI.zkPfNRxpvegGcN1CWncwljw6FM9aTau");
+        param2.put("Htoken", token);
 
         Call<LoginRes> call_post2 = service.LoginReqFunc("isfavorite", param2);
         call_post2.enqueue(new Callback<LoginRes>() {
@@ -159,7 +170,8 @@ public class PlaceActivity extends AppCompatActivity implements OnMapReadyCallba
                     binding.Placesname.setText(result.PlaceName);
                     binding.information.setText(result.Information);
                     //place사진들 넣기 // 생각해보니까 이거 뷰페이져?
-                    binding.placespicture.setImageResource(R.drawable.heart);
+                    Glide.with(context).load(result.Picturepath).into(binding.placespicture);
+
                     List<Address>list = null;
                     String str = result.Address;
                     try {
@@ -221,7 +233,18 @@ public class PlaceActivity extends AppCompatActivity implements OnMapReadyCallba
             }
         });
         mapView.getMapAsync(this::onMapReady);
+
+
+        binding.gotomypage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), MypageActivity.class);
+                // passing array index
+                startActivity(i);
+            }
+        });
     }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -232,6 +255,33 @@ public class PlaceActivity extends AppCompatActivity implements OnMapReadyCallba
     protected void onResume() {
         super.onResume();
         mapView.onResume();
+        HashMap<String, Object> param1 = new HashMap<>();
+        param1.put("Place_name", binding.Placesname.getText());
+        Call<ArrayList<PostingInPlaceRes>> call_post2 = service.PostingInPlaceReqFunc("sitereviewlist", param1);
+        call_post2.enqueue(new Callback<ArrayList<PostingInPlaceRes>>() {
+            @Override
+            public void onResponse(Call<ArrayList<PostingInPlaceRes>> call, Response<ArrayList<PostingInPlaceRes>> response) {
+                if (response.isSuccessful()) {
+                    ArrayList<PostingInPlaceRes> result = response.body();
+                    Log.v(Tag, "search result : " + result.toString());
+                    for (int i = 0; i < result.size(); i++) {
+                        PostingData data = new PostingData(result.get(i).Posting, result.get(i).Posting_date, Integer.parseInt(result.get(i).Star), result.get(i).name);
+                        dataList.add(data);
+                        adapter.notifyDataSetChanged();
+                    }
+                } else {
+                    Log.v(Tag, "error = " + String.valueOf(response.code()));
+                    Toast.makeText(getApplicationContext(), String.valueOf(response.code()), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<PostingInPlaceRes>> call, Throwable t) {
+                Log.v(Tag, "Fail in search");
+                Toast.makeText(getApplicationContext(), "Fail", Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
 
     @Override
@@ -273,14 +323,6 @@ public class PlaceActivity extends AppCompatActivity implements OnMapReadyCallba
         googleMap.addMarker(markerOptions);
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16));
 
-        binding.gotomypage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), MypageActivity.class);
-                // passing array index
-                startActivity(i);
-            }
-        });
 
     }
     @Override
@@ -288,4 +330,5 @@ public class PlaceActivity extends AppCompatActivity implements OnMapReadyCallba
         super.onBackPressed();
         finish();   //현재 액티비티 종료
     }
+
 }

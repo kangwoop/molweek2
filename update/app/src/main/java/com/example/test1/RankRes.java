@@ -14,6 +14,9 @@ public class RankRes {
     @SerializedName("Information")
     public String Information;
 
+    @SerializedName("Posting")
+    public String posting;
+
     @SerializedName("star")
     public String star;
 
@@ -27,7 +30,7 @@ public class RankRes {
                 "Information=" + Information +
                 "star=" + star +
                 "Posting_date=" + Posting_date +
-                ", PicturePath ='" + Picturepath + '\'' +
+                ", Picturepath ='" + Picturepath + '\'' +
                 '}';
     }
 }

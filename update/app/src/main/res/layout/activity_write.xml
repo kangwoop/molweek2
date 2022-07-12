@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -14,11 +15,12 @@
 
     <RatingBar
         android:id="@+id/ratingbar"
+        style="?android:attr/ratingBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:numStars="5"
-        android:stepSize="1"
-        style="?android:attr/ratingBarStyle"/>
+        android:progressTint="#FB6497"
+        android:stepSize="1" />
 
     <EditText
         android:id="@+id/contentsinput"
@@ -38,8 +40,10 @@
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_margin="10dp"
+        android:backgroundTint="#FB6497"
         android:fontFamily="@font/fontstyle"
-        android:text="완료"/>
+        android:text="완료"
+        app:iconTint="#FFFB6497" />
 
 </LinearLayout>
 

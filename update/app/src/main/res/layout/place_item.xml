@@ -22,92 +22,37 @@
         android:layout_width="wrap_content"
         android:layout_height="34dp"
         android:layout_marginStart="36dp"
-        android:text="여기에는 장소이름"
         android:fontFamily="@font/fontstyle"
+        android:text="여기에는 장소이름"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.21"
         app:layout_constraintStart_toEndOf="@+id/placepicture"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.186" />
 
     <ImageView
-        android:id="@+id/star1"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="240dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/placepicture"
-        app:layout_constraintTop_toBottomOf="@+id/placename"
-        app:layout_constraintVertical_bias="0.625"
-        app:srcCompat="@drawable/emptystar" />
-
-    <ImageView
-        android:id="@+id/star3"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.006"
-        app:layout_constraintStart_toEndOf="@+id/star2"
-        app:layout_constraintTop_toBottomOf="@+id/placename"
-        app:layout_constraintVertical_bias="0.375"
-        app:srcCompat="@drawable/emptystar" />
-
-    <ImageView
-        android:id="@+id/star4"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/star3"
-        app:layout_constraintTop_toBottomOf="@+id/placename"
-        app:layout_constraintVertical_bias="0.625"
-        app:srcCompat="@drawable/emptystar" />
-
-    <ImageView
-        android:id="@+id/star5"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/star4"
-        app:layout_constraintTop_toBottomOf="@+id/placename"
-        app:layout_constraintVertical_bias="0.625"
-        app:srcCompat="@drawable/emptystar" />
-
-    <ImageView
-        android:id="@+id/star2"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.009"
-        app:layout_constraintStart_toEndOf="@+id/star1"
-        app:layout_constraintTop_toBottomOf="@+id/placename"
-        app:layout_constraintVertical_bias="0.625"
-        app:srcCompat="@drawable/emptystar" />
-
-    <ImageView
         android:id="@+id/like"
         android:layout_width="42dp"
         android:layout_height="40dp"
-        android:layout_marginStart="35dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/star5"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.687"
         app:srcCompat="@drawable/emptyheart" />
+
+    <RatingBar
+        android:id="@+id/ratingBar3"
+        style="@style/Widget.AppCompat.RatingBar.Indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:progressTint="#FFEB3B"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/like"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toEndOf="@+id/placepicture"
+        app:layout_constraintTop_toBottomOf="@+id/placename"
+        app:layout_constraintVertical_bias="0.147" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
