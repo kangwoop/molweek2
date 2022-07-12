@@ -14,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.place.PostingData;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -92,7 +94,7 @@ public class MyreviewFragment extends Fragment {
         retrofit = ((MainActivity) MainActivity.context_main).retrofit;
         service = ((MainActivity) MainActivity.context_main).service;
 
-        ArrayList<String> review_list = new ArrayList<>();
+        ArrayList<PostingData> review_list = new ArrayList<>();
 
         RecyclerView recyclerView = rootview.findViewById(R.id.myreviewrecyclerView);
 
@@ -112,7 +114,7 @@ public class MyreviewFragment extends Fragment {
                     ArrayList<RankRes> result = response.body();
                     Log.v(Tag, "search result : " + result.toString());
                     for(int i = 0; i < result.size(); i++){
-                        review_list.add(result.get(i).PlaceName);
+                        review_list.add(new PostingData(result.get(i).posting, result.get(i).Posting_date,Integer.parseInt(result.get(i).star),result.get(i).PlaceName) );
                         customAdapter.notifyDataSetChanged();
                     }
 

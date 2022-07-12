@@ -1,5 +1,6 @@
 package com.example.searchcountry;
 
+import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.searchPlace.SearchPlaceActivity;
 import com.example.test1.R;
 import com.example.test1.databinding.CountrylistBinding;
@@ -18,12 +20,14 @@ import java.util.ArrayList;
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.AdapterViewHolder> {
     private CountrylistBinding binding;
     private ArrayList<SearchCountryData> dataArrayList;
+    Context context;
     public SearchAdapter(ArrayList<SearchCountryData>arrayList){
         this.dataArrayList = arrayList;
     }
     @NonNull
     @Override
     public AdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        context = parent.getContext();
         binding = CountrylistBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false);
         View view = binding.getRoot();
         AdapterViewHolder holder = new AdapterViewHolder(binding);
@@ -32,7 +36,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.AdapterVie
 
     @Override
     public void onBindViewHolder(@NonNull AdapterViewHolder holder, int position) {
-        holder.binding.imageView.setImageResource(R.drawable.img);
+        Glide.with(context).load(dataArrayList.get(position).getImagePath()).into(holder.binding.imageView);
         holder.binding.country.setText(dataArrayList.get(position).getCountryName());
         holder.binding.places.setText(dataArrayList.get(position).getPlaceList());
     }

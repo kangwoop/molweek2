@@ -1,5 +1,6 @@
 package com.example.searchPlace;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -13,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.place.PlaceActivity;
 import com.example.searchcountry.SearchActivity;
 import com.example.test1.LoginRes;
@@ -35,11 +37,13 @@ public class SearchPlaceAdapter extends RecyclerView.Adapter<SearchPlaceAdapter.
         this.dataArrayList = arrayList;
     }
 
+    Context context;
     @NonNull
     @Override
     public AdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         binding = PlaceItemBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false);
         View view = binding.getRoot();
+        context = parent.getContext();
         AdapterViewHolder holder = new AdapterViewHolder(binding);
         return holder;
     }
@@ -47,30 +51,10 @@ public class SearchPlaceAdapter extends RecyclerView.Adapter<SearchPlaceAdapter.
     @Override
     public void onBindViewHolder(@NonNull AdapterViewHolder holder, int position) {
         binding.placename.setText(dataArrayList.get(position).PlaceName);
-        binding.placepicture.setImageResource(R.drawable.heart);
-        if (dataArrayList.get(position).getAvgStar() == 0) {
+        Glide.with(context).load(dataArrayList.get(position).imagePath).into(binding.placepicture);
 
-        } else if (dataArrayList.get(position).getAvgStar() == 1) {
-            binding.star1.setImageResource(R.drawable.star);
-        } else if (dataArrayList.get(position).getAvgStar() == 2) {
-            binding.star1.setImageResource(R.drawable.star);
-            binding.star2.setImageResource(R.drawable.star);
-        } else if (dataArrayList.get(position).getAvgStar() == 3) {
-            binding.star1.setImageResource(R.drawable.star);
-            binding.star2.setImageResource(R.drawable.star);
-            binding.star3.setImageResource(R.drawable.star);
-        } else if (dataArrayList.get(position).getAvgStar() == 4) {
-            binding.star1.setImageResource(R.drawable.star);
-            binding.star2.setImageResource(R.drawable.star);
-            binding.star3.setImageResource(R.drawable.star);
-            binding.star4.setImageResource(R.drawable.star);
-        } else {
-            binding.star1.setImageResource(R.drawable.star);
-            binding.star2.setImageResource(R.drawable.star);
-            binding.star3.setImageResource(R.drawable.star);
-            binding.star4.setImageResource(R.drawable.star);
-            binding.star5.setImageResource(R.drawable.star);
-        }
+        binding.ratingBar3.setRating((float) dataArrayList.get(position).AvgStar);
+
         if(dataArrayList.get(position).isEmpty){
             binding.like.setImageResource(R.drawable.heart);
         }

@@ -90,10 +90,11 @@ public class FavoriteFragment extends Fragment {
         String Tag = "FavoriteFragment";
         //Log.d("token~~:", token);
 
+
         retrofit = ((MainActivity) MainActivity.context_main).retrofit;
         service = ((MainActivity) MainActivity.context_main).service;
 
-        ArrayList<String> site_list = new ArrayList<>();
+        ArrayList<RankData> site_list = new ArrayList<>();
 
 
         RecyclerView recyclerView = rootview.findViewById(R.id.favoriterecyclerView);
@@ -114,7 +115,10 @@ public class FavoriteFragment extends Fragment {
                     ArrayList<RankRes> result = response.body();
                     Log.v(Tag, "search result : " + result.toString());
                     for(int i = 0; i < result.size(); i++){
-                        site_list.add(result.get(i).PlaceName);
+                        Log.i(Tag, result.get(i).star);
+
+
+                        site_list.add(new RankData(result.get(i).Picturepath, result.get(i).PlaceName,(int)Double.parseDouble(result.get(i).star)));
                         customAdapter.notifyDataSetChanged();
                     }
 

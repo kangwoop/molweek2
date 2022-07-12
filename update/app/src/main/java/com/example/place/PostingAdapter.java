@@ -41,6 +41,7 @@ public class PostingAdapter extends RecyclerView.Adapter<PostingAdapter.AdapterV
         binding.Posting.setText(dataArrayList.get(position).Posting);
         binding.Postingdate.setText(dataArrayList.get(position).Posting_date);
         binding.WhoPosting.setText(dataArrayList.get(position).name);
+        binding.ratingBar.setRating(dataArrayList.get(position).star);
     }
     @Override
     public int getItemCount() {
