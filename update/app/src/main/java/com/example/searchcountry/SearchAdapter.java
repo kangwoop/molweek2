@@ -56,7 +56,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.AdapterVie
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
                     if(pos != RecyclerView.NO_POSITION){
-                        Toast.makeText(binding.country.getContext(),pos + "아이템",Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(binding.country.getContext(),pos + "아이템",Toast.LENGTH_SHORT).show();
                         // Sending image id to FullScreenActivity
                         Intent i = new Intent(binding.country.getContext(), SearchPlaceActivity.class);
                         // passing array index

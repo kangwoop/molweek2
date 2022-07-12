@@ -78,7 +78,7 @@ public class SearchPlaceAdapter extends RecyclerView.Adapter<SearchPlaceAdapter.
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
                     if(pos != RecyclerView.NO_POSITION){
-                        Toast.makeText(binding.placename.getContext(),pos + "아이템",Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(binding.placename.getContext(),pos + "아이템",Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(binding.placename.getContext().getApplicationContext(), PlaceActivity.class);
                         i.putExtra("placename", dataArrayList.get(pos).PlaceName);
                         binding.placepicture.getContext().startActivity(i);

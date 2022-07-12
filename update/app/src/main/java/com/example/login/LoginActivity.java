@@ -114,7 +114,7 @@ public class LoginActivity extends AppCompatActivity {
                         if(response.isSuccessful()){
                             String result  = response.body().toString();
                             Log.v(Tag,"result = " + result);
-                            Toast.makeText(getApplicationContext(),result,Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(),result,Toast.LENGTH_SHORT).show();
 
                             if(response.body().token.equals(" ")){
                                 Toast.makeText(getApplicationContext(),"Invalid user",Toast.LENGTH_SHORT).show();
@@ -173,7 +173,7 @@ public class LoginActivity extends AppCompatActivity {
                             if(response.isSuccessful()){
                                 String result  = response.body().toString();
                                 Log.v(Tag,"result = " + result);
-                                Toast.makeText(getApplicationContext(),result,Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getApplicationContext(),result,Toast.LENGTH_SHORT).show();
 
                                 if(response.body().token.equals(" ")){
                                     Toast.makeText(getApplicationContext(),"Invalid user",Toast.LENGTH_SHORT).show();

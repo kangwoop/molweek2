@@ -117,7 +117,7 @@ public class PlaceActivity extends AppCompatActivity implements OnMapReadyCallba
                 if (response.isSuccessful()) {
                     String result = response.body().result;
                     Log.v(Tag, "result = " + result);
-                    Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
                     if (result.equals("true")) {
                         heart = true;
                         binding.heart.setImageResource(R.drawable.heart);

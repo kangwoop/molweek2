@@ -70,13 +70,14 @@ public class RegisterActivity extends AppCompatActivity {
                         if(response.isSuccessful()){
                             String result  = response.body().toString();
                             Log.v(Tag,"result = " + result);
-                            Toast.makeText(getApplicationContext(),result,Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(),result,Toast.LENGTH_SHORT).show();
                             if(response.body().result.equals("false")){
                                 AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
                                 dialog = builder.setMessage("중복된 아이디가 있는지 확인하세요.").setNegativeButton("확인", null).create();
                                 dialog.show();
                                 return;
                             }
+                            Toast.makeText(getApplicationContext(),"유효한 아이디 입니다.",Toast.LENGTH_SHORT).show();
 
                             is_valid = true;
                         }
@@ -133,7 +134,7 @@ public class RegisterActivity extends AppCompatActivity {
                         if(response.isSuccessful()){
                             String result  = response.body().toString();
                             Log.v(Tag,"result = " + result);
-                            Toast.makeText(getApplicationContext(),result,Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(),result,Toast.LENGTH_SHORT).show();
                             Toast.makeText(getApplicationContext(), String.format("%s님 가입을 환영합니다.", UserName), Toast.LENGTH_SHORT).show();
                         }
                         else{
