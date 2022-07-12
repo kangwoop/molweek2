@@ -1,8 +1,10 @@
 package com.example.test1;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +17,8 @@ import com.example.login.KakaoApplication;
 import com.example.login.LoginActivity;
 import com.example.place.PlaceActivity;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.HashMap;
 
 import retrofit2.Call;
@@ -32,11 +36,13 @@ public class WriteActivity extends AppCompatActivity {
     private RetrofitAPIInterface service;
     private static final String Tag = "WriteActivity";
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write);
-
+        LocalDate now = LocalDate.now();
+        LocalTime noww = LocalTime.now();
         retrofit = ((MainActivity) MainActivity.context_main).retrofit;
         service = ((MainActivity) MainActivity.context_main).service;
 
@@ -81,6 +87,16 @@ public class WriteActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),"Fail",Toast.LENGTH_SHORT).show();
                     }
                 });
+                Intent intent = new Intent();
+                int star = ratingbarupdate;
+                String name = Name;
+                String posting = contents;
+                String date = now.toString() + noww.toString();
+                intent.putExtra("star",star);
+                intent.putExtra("name",name);
+                intent.putExtra("posting",posting);
+                intent.putExtra("date",date);
+                setResult(RESULT_OK,intent);
                 finish();   //현재 액티비티 종료
             }
         });

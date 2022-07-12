@@ -52,7 +52,7 @@ public class SearchPlaceAdapter extends RecyclerView.Adapter<SearchPlaceAdapter.
     public void onBindViewHolder(@NonNull AdapterViewHolder holder, int position) {
         binding.placename.setText(dataArrayList.get(position).PlaceName);
         Glide.with(context).load(dataArrayList.get(position).imagePath).into(binding.placepicture);
-
+        Log.i("lolololo", String.valueOf(dataArrayList.get(position).AvgStar));
         binding.ratingBar3.setRating((float) dataArrayList.get(position).AvgStar);
 
         if(dataArrayList.get(position).isEmpty){

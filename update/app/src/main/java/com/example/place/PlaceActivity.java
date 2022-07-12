@@ -1,5 +1,6 @@
 package com.example.place;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
@@ -9,6 +10,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,8 +54,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-implements OnMapReadyCallback
-public class PlaceActivity extends AppCompatActivity  {
+public class PlaceActivity extends AppCompatActivity implements OnMapReadyCallback {
     MapView mapView = null;
     private ActivityPlaceinfoBinding binding;
     private ArrayList<PostingData> dataList;
@@ -76,7 +81,26 @@ public class PlaceActivity extends AppCompatActivity  {
 
         KakaoApplication myApp = (KakaoApplication)getApplicationContext();
         token = myApp.getToken();
-
+        ActivityResultLauncher<Intent> launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>()
+                {
+                    @Override
+                    public void onActivityResult(ActivityResult data)
+                    {
+                        Log.d("TAG", "data : " + data);
+                        if (data.getResultCode() == Activity.RESULT_OK)
+                        {
+                            Intent intent = data.getData();
+                            int star = intent.getIntExtra("star",0);
+                            String name = intent.getStringExtra ("name");
+                            String posting = intent.getStringExtra("posting");
+                            String date = intent.getStringExtra("date");
+                            PostingData data1 = new PostingData(posting,date,star,name);
+                            dataList.add(data1);
+                            adapter.notifyDataSetChanged();
+                        }
+                    }
+                });
         String placename = getIntent().getStringExtra("placename");
         Log.i(Tag, "placename" + placename);
         retrofit = ((MainActivity) MainActivity.context_main).retrofit;
@@ -229,7 +253,7 @@ public class PlaceActivity extends AppCompatActivity  {
                 Intent i = new Intent(getApplicationContext(), WriteActivity.class);
                 // passing array index
                 i.putExtra("placename",binding.Placesname.getText());
-                startActivity(i);
+                launcher.launch(i);
             }
         });
         mapView.getMapAsync(this::onMapReady);
@@ -255,33 +279,34 @@ public class PlaceActivity extends AppCompatActivity  {
     protected void onResume() {
         super.onResume();
         mapView.onResume();
-        HashMap<String, Object> param1 = new HashMap<>();
-        param1.put("Place_name", binding.Placesname.getText());
-        Call<ArrayList<PostingInPlaceRes>> call_post2 = service.PostingInPlaceReqFunc("sitereviewlist", param1);
-        call_post2.enqueue(new Callback<ArrayList<PostingInPlaceRes>>() {
-            @Override
-            public void onResponse(Call<ArrayList<PostingInPlaceRes>> call, Response<ArrayList<PostingInPlaceRes>> response) {
-                if (response.isSuccessful()) {
-                    ArrayList<PostingInPlaceRes> result = response.body();
-                    Log.v(Tag, "search result : " + result.toString());
-                    for (int i = 0; i < result.size(); i++) {
-                        PostingData data = new PostingData(result.get(i).Posting, result.get(i).Posting_date, Integer.parseInt(result.get(i).Star), result.get(i).name);
-                        dataList.add(data);
-                        adapter.notifyDataSetChanged();
-                    }
-                } else {
-                    Log.v(Tag, "error = " + String.valueOf(response.code()));
-                    Toast.makeText(getApplicationContext(), String.valueOf(response.code()), Toast.LENGTH_SHORT).show();
-                }
-            }
+//        HashMap<String, Object> param1 = new HashMap<>();
+//        param1.put("Place_name", binding.Placesname.getText());
+//        Call<ArrayList<PostingInPlaceRes>> call_post2 = service.PostingInPlaceReqFunc("sitereviewlist", param1);
+//        call_post2.enqueue(new Callback<ArrayList<PostingInPlaceRes>>() {
+//            @Override
+//            public void onResponse(Call<ArrayList<PostingInPlaceRes>> call, Response<ArrayList<PostingInPlaceRes>> response) {
+//                if (response.isSuccessful()) {
+//                    ArrayList<PostingInPlaceRes> result = response.body();
+//                    Log.v(Tag, "search result : " + result.toString());
+//                    for (int i = 0; i < result.size(); i++) {
+//                        PostingData data = new PostingData(result.get(i).Posting, result.get(i).Posting_date, Integer.parseInt(result.get(i).Star), result.get(i).name);
+//                        dataList.add(data);
+//                        adapter.notifyDataSetChanged();
+//                    }
+//                } else {
+//                    Log.v(Tag, "error = " + String.valueOf(response.code()));
+//                    Toast.makeText(getApplicationContext(), String.valueOf(response.code()), Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ArrayList<PostingInPlaceRes>> call, Throwable t) {
+//                Log.v(Tag, "Fail in search");
+//                Toast.makeText(getApplicationContext(), "Fail", Toast.LENGTH_SHORT).show();
+//
+//            }
+//        });
 
-            @Override
-            public void onFailure(Call<ArrayList<PostingInPlaceRes>> call, Throwable t) {
-                Log.v(Tag, "Fail in search");
-                Toast.makeText(getApplicationContext(), "Fail", Toast.LENGTH_SHORT).show();
-
-            }
-        });
     }
 
     @Override

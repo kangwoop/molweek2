@@ -71,6 +71,7 @@ public class SearchPlaceActivity extends Activity {
                     ArrayList<SearchPlaceRes> result = response.body();
                     Log.v(Tag, "search result : " + result);
                     for(int i = 0; i < result.size(); i++){
+                        Log.i("lalalala",result.get(i).avgStar);
                         SearchPlaceData data = new SearchPlaceData(result.get(i).PicturePath,result.get(i).PlaceName,Double.parseDouble(result.get(i).avgStar),true);
                         if(result.get(i).favorite.equals("true")){
                             data.isEmpty = true;
