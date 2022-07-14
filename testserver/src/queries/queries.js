@@ -1,7 +1,6 @@
 //login_table
 exports.login_count = "select count(*) as cnt from login where Uid = ?;";
 exports.login_insert = "insert into login (Uid, Name, Upwd, Token) values(?, ?, ?, ?);";
-exports.login_select = "select * from login where Uid = ?; ";
 exports.login_update_token = "update login SET Token = ? Where Uid = ?"
 
 //favorite,posting table

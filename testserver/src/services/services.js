@@ -163,7 +163,7 @@ exports.postwrite = async(Htoken,star,name,Posting,PlaceName) => {
     try{
         let data = await pool.query(myQuery.writeposting,[Htoken,star,name,Posting,PlaceName])
         console.log(star + typeof(star))
-        let dat = await pool.query(myQuery.increase_sumstar,[parseInt(star),PlaceName])
+        let dat = await pool.query(myQuery.increase_sumstar,[parseint(star),PlaceName])
         let da = await pool.query(myQuery.increase_sumpoeple,[PlaceName])
         return data[0]
     }catch(err){

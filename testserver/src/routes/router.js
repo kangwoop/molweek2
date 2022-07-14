@@ -17,4 +17,6 @@ router.post('/isfavorite',Controller.postisfavor);
 router.post('/checkfavorite',Controller.postcheckfavor);
 // router.post('/avgstar',Controller.postavgstar);
 
+
+
 module.exports = router;
